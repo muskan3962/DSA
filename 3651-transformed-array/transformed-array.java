@@ -2,14 +2,13 @@ class Solution {
     public int[] constructTransformedArray(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 0) {
-                ans[i] = 0;
-            } else {
-                int next = ((i + nums[i]) % n + n) % n;
-                ans[i] = nums[next];
+        for(int i=0;i<n;i++){
+            int shift = nums[i]%n;
+            int newIndex = (i+shift)%n;
+            if(newIndex<0){
+                newIndex+=n;
             }
+            ans[i] = nums[newIndex];
         }
         return ans;
     }
