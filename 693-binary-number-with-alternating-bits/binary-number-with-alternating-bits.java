@@ -1,10 +1,11 @@
 class Solution {
     public boolean hasAlternatingBits(int n) {
-        String b= Integer.toBinaryString(n);
-        for(int i=0;i<b.length()-1;i++){
-            if(b.charAt(i)==b.charAt(i+1)){
-                return false;
-            }
+        int currBit = n%2;
+        n =n/2;
+        while(n>0){
+            if(currBit == n%2)return false;
+             currBit = n%2;
+             n=n/2;
         }
         return true;
     }
