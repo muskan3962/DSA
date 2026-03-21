@@ -5,15 +5,17 @@ class Solution {
         for(int i:hand){
             mp.put(i,mp.getOrDefault(i,0)+1);
         }
-        Arrays.sort(hand);
-        for(int j:hand){
-            if(mp.get(j)>0){
-               for(int k=j;k<j+groupSize;k++){
-                if(mp.getOrDefault(k,0)==0)return false;
-                mp.put(k,mp.get(k)-1);
+        PriorityQueue<Integer> minQ = new PriorityQueue<>(mp.keySet());
+        while(!minQ.isEmpty()){
+            int first = minQ.peek();
+            for(int i = first;i<first+groupSize;i++){
+                if(!mp.containsKey(i))return false;
+                mp.put(i,mp.get(i)-1);
+                if(mp.get(i)==0){
+                    if(i !=minQ.peek())return false;
+                    minQ.poll();
+                }
             }
-            }
-       
         }
         return true;
     }
