@@ -1,40 +1,24 @@
-public class Solution {
+class Solution {
     public String predictPartyVictory(String senate) {
-        List<Character> s = new ArrayList<>();
-        for (char c : senate.toCharArray()) {
-            s.add(c);
+        Queue<Integer> R = new LinkedList<>();
+        Queue<Integer> D = new LinkedList<>();
+        int n =senate.length();
+        for(int i =0;i<n;i++){
+           if(senate.charAt(i)=='R'){
+            R.add(i);
+           }else{
+            D.add(i);
+           }
         }
-
-        while (true) {
-            int i = 0;
-            while (i < s.size()) {
-                if (!s.contains('R')) {
-                    return "Dire";
-                }
-                if (!s.contains('D')) {
-                    return "Radiant";
-                }
-                if (s.get(i) == 'R') {
-                    int j = (i + 1) % s.size();
-                    while (s.get(j) == 'R') {
-                        j = (j + 1) % s.size();
-                    }
-                    s.remove(j);
-                    if (j < i) {
-                        i--;
-                    }
-                } else {
-                    int j = (i + 1) % s.size();
-                    while (s.get(j) == 'D') {
-                        j = (j + 1) % s.size();
-                    }
-                    s.remove(j);
-                    if (j < i) {
-                        i--;
-                    }
-                }
-                i++;
+        while(!R.isEmpty() && !D.isEmpty()){
+            int rTurn  = R.poll();
+            int dTurn = D.poll();
+            if(rTurn<dTurn){
+                R.add(rTurn+n);
+            }else{
+                D.add(dTurn+n);
             }
         }
+        return R.isEmpty()? "Dire":"Radiant";
     }
 }
