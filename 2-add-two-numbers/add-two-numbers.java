@@ -18,8 +18,7 @@ class Solution {
             int x = (l1!=null)?l1.val:0;
             int y = (l2 != null)? l2.val:0;
             sum = x+y+carry;
-            ListNode newNode  = new ListNode(sum%10);
-            temp.next = newNode;
+            temp.next =  new ListNode(sum%10);
             temp = temp.next;
             carry = sum/10;
             if(l1!=null){
