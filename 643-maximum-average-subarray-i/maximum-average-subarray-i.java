@@ -4,16 +4,16 @@ class Solution {
         for(int i =0;i<k;i++){
             sum+=nums[i];
         }
-        int st =0;
-        int end =k;
-        int max = sum;
-        while(end<nums.length){
-            sum-=nums[st];
-            st++;
-            sum+=nums[end];
-            end++;
-            max = Math.max(max,sum);
+         double maxAvg = (double)sum/k;
+        int left =0;
+        int right =k;
+        while(right<nums.length){
+             sum= sum-nums[left];
+             sum =sum+nums[right];
+             maxAvg = Math.max(maxAvg,(double)sum/k);
+             left++;
+             right++;
         }
-        return (double) max/k;
+        return maxAvg;
     }
 }
